@@ -12,31 +12,31 @@ export default function Home() {
       <section className="hero">
         <div className="wrap">
           <div className="hero-copy">
-            <span className="label">Welcome to FxN</span>
-            <h1>Leadership Pods &amp; Fractional Executives for Growing Companies</h1>
+            <span className="label">India&apos;s Shared Leadership Platform</span>
+            <h1>Build the leadership your business needs. Without building the overhead it doesn&apos;t.</h1>
             <p className="lede">
-              India&apos;s shared leadership platform. Access senior leaders across Finance, Technology, GTM, Product, People &amp; Operations through outcome-led Leadership Pods or flexible Leadership as a Service subscriptions.
+              FxN gives growing Indian companies access to senior leadership through outcome-led Leadership Pods and Leadership as a Service.
             </p>
             <div className="hero-actions">
               <a href="/leadership-as-a-service" className="btn btn-primary">
-                Explore Leadership as a Service
+                Explore FxN
               </a>
               <a href="/member-directory" className="btn btn-outline light">
-                Browse Fractional Leaders
+                Find Your Leadership Model
               </a>
             </div>
             <div className="hero-proof">
               <div>
-                <div className="num">32+</div>
-                <div className="cap">Fractional Leaders</div>
-              </div>
-              <div>
                 <div className="num">14</div>
-                <div className="cap">Partner Companies</div>
+                <div className="cap">Active FxN Partners</div>
               </div>
               <div>
-                <div className="num">₹2.5Cr+</div>
-                <div className="cap">Combined Experience</div>
+                <div className="num">6+</div>
+                <div className="cap">Leadership Disciplines</div>
+              </div>
+              <div>
+                <div className="num">1</div>
+                <div className="cap">Shared Operating Model</div>
               </div>
             </div>
           </div>
@@ -49,21 +49,21 @@ export default function Home() {
             >
               <circle cx="220" cy="220" r="200" className="core" />
               <circle cx="220" cy="220" r="48" className="fn-node" fill="var(--navy-deep)" />
-              <text x="220" y="226" textAnchor="middle" className="center-label">Your</text>
-              <text x="220" y="246" textAnchor="middle" className="center-label">Company</text>
+              <text x="220" y="226" textAnchor="middle" className="center-label">FxN</text>
+              <text x="220" y="246" textAnchor="middle" className="center-label" style={{ fontSize: '11px' }}>Pods + LaAS</text>
 
               {[
-                { x: 220, y: 40, label: 'Finance', color: 'var(--fn-finance)' },
-                { x: 380, y: 100, label: 'GTM', color: 'var(--fn-gtm)' },
-                { x: 380, y: 340, label: 'Tech', color: 'var(--fn-tech)' },
-                { x: 220, y: 400, label: 'Product', color: 'var(--fn-product)' },
+                { x: 220, y: 40, label: 'Strategy', color: 'var(--fn-gtm)' },
+                { x: 380, y: 100, label: 'Revenue', color: 'var(--fn-finance)' },
+                { x: 380, y: 340, label: 'Finance', color: 'var(--fn-finance)' },
+                { x: 220, y: 400, label: 'Technology', color: 'var(--fn-tech)' },
                 { x: 60, y: 340, label: 'People', color: 'var(--fn-people)' },
-                { x: 60, y: 100, label: 'Ops', color: 'var(--fn-ops)' },
+                { x: 60, y: 100, label: 'Operations', color: 'var(--fn-ops)' },
               ].map((node, idx) => (
                 <g key={idx}>
                   <line x1="220" y1="220" x2={node.x} y2={node.y} stroke="var(--line)" strokeWidth="1" strokeDasharray="4,2" />
                   <circle cx={node.x} cy={node.y} r="32" className="fn-node" fill={node.color} />
-                  <text x={node.x} y={node.y} textAnchor="middle" dy="0.3em">{node.label}</text>
+                  <text x={node.x} y={node.y} textAnchor="middle" dy="0.3em" style={{ fontSize: '12px' }}>{node.label}</text>
                 </g>
               ))}
             </svg>
