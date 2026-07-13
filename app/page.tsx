@@ -1,247 +1,234 @@
-import Navigation from '@/app/components/Navigation'
-import Footer from '@/app/components/Footer'
-import HeroSection from '@/app/components/HeroSection'
-import StatCard from '@/app/components/StatCard'
-import RevealOnScroll from '@/app/components/RevealOnScroll'
-import { partners } from '@/app/data/partners'
-import { insights } from '@/app/data/insights'
-import { caseStudies } from '@/app/data/case-studies'
-import { useCases } from '@/app/data/use-cases'
-import Image from 'next/image'
-import Link from 'next/link'
+'use client';
+
+import Header from '@/app/components/Header';
+import Footer from '@/app/components/Footer';
 
 export default function Home() {
   return (
     <>
-      <Navigation />
+      <Header />
 
-      {/* Hero Section */}
-      <HeroSection
-        title="Reimagining Leadership Through Functional Networks"
-        subtitle="Welcome to FxN"
-        description="Connect with visionary leaders, unlock strategic insights, and accelerate growth through intentional collaboration and purposeful partnerships."
-        cta={{ text: 'Explore Our Community', href: '/member-directory' }}
-      />
-
-      {/* Stats Section */}
-      <section className="py-16 md:py-24 bg-background-light border-y border-border">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Growing Network of Leaders</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              Connecting exceptional leaders across industries and geographies.
+      {/* HERO */}
+      <section className="hero">
+        <div className="wrap">
+          <div className="hero-copy">
+            <span className="label">Welcome to FxN</span>
+            <h1>Leadership Pods &amp; Fractional Executives for Growing Companies</h1>
+            <p className="lede">
+              India&apos;s shared leadership platform. Access senior leaders across Finance, Technology, GTM, Product, People &amp; Operations through outcome-led Leadership Pods or flexible Leadership as a Service subscriptions.
             </p>
-          </RevealOnScroll>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <RevealOnScroll delay={0.1}>
-              <StatCard number={32} label="Active Members" description="Industry leaders and executives" />
-            </RevealOnScroll>
-            <RevealOnScroll delay={0.2}>
-              <StatCard number={14} label="Partner Organizations" description="Strategic partnerships" />
-            </RevealOnScroll>
-            <RevealOnScroll delay={0.3}>
-              <StatCard number={8} label="Exclusive Insights" description="Monthly thought leadership" />
-            </RevealOnScroll>
-            <RevealOnScroll delay={0.4}>
-              <StatCard number={3} label="Proven Case Studies" description="Measurable impact and results" />
-            </RevealOnScroll>
+            <div className="hero-actions">
+              <a href="/leadership-as-a-service" className="btn btn-primary">
+                Explore Leadership as a Service
+              </a>
+              <a href="/member-directory" className="btn btn-outline light">
+                Browse Fractional Leaders
+              </a>
+            </div>
+            <div className="hero-proof">
+              <div>
+                <div className="num">32+</div>
+                <div className="cap">Fractional Leaders</div>
+              </div>
+              <div>
+                <div className="num">14</div>
+                <div className="cap">Partner Companies</div>
+              </div>
+              <div>
+                <div className="num">₹2.5Cr+</div>
+                <div className="cap">Combined Experience</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Use Cases Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">How FxN Drives Value</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              From strategic advisory to talent acquisition, discover how our network accelerates your success.
-            </p>
-          </RevealOnScroll>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {useCases.map((useCase, index) => (
-              <RevealOnScroll key={useCase.id} delay={index * 0.1}>
-                <div className="card hover:shadow-lg transition-shadow">
-                  <div className="text-4xl mb-4">{useCase.icon}</div>
-                  <h3 className="text-xl font-serif font-bold mb-2">{useCase.title}</h3>
-                  <p className="text-sm text-foreground-secondary mb-4">{useCase.description}</p>
-                  <ul className="space-y-2">
-                    {useCase.benefits.map((benefit) => (
-                      <li key={benefit} className="text-xs text-foreground flex items-start gap-2">
-                        <span className="text-accent mt-1">✓</span>
-                        <span>{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Members Teaser */}
-      <section className="py-16 md:py-24 bg-background-light border-y border-border">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Meet Our Leaders</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              Diverse backgrounds, unified vision for transformational leadership and impact.
-            </p>
-          </RevealOnScroll>
-
-          <div className="text-center">
-            <Link
-              href="/member-directory"
-              className="inline-block px-8 py-4 bg-accent text-background font-medium rounded-md hover:bg-accent-dark transition-all duration-300 transform hover:scale-105"
+          <div className="hero-visual">
+            <svg
+              className="node-svg"
+              viewBox="0 0 440 440"
+              preserveAspectRatio="xMidYMid meet"
             >
-              View Full Directory
-            </Link>
+              <circle cx="220" cy="220" r="200" className="core" />
+              <circle cx="220" cy="220" r="48" className="fn-node" fill="var(--navy-deep)" />
+              <text x="220" y="226" textAnchor="middle" className="center-label">Your</text>
+              <text x="220" y="246" textAnchor="middle" className="center-label">Company</text>
+
+              {[
+                { x: 220, y: 40, label: 'Finance', color: 'var(--fn-finance)' },
+                { x: 380, y: 100, label: 'GTM', color: 'var(--fn-gtm)' },
+                { x: 380, y: 340, label: 'Tech', color: 'var(--fn-tech)' },
+                { x: 220, y: 400, label: 'Product', color: 'var(--fn-product)' },
+                { x: 60, y: 340, label: 'People', color: 'var(--fn-people)' },
+                { x: 60, y: 100, label: 'Ops', color: 'var(--fn-ops)' },
+              ].map((node, idx) => (
+                <g key={idx}>
+                  <line x1="220" y1="220" x2={node.x} y2={node.y} stroke="var(--line)" strokeWidth="1" strokeDasharray="4,2" />
+                  <circle cx={node.x} cy={node.y} r="32" className="fn-node" fill={node.color} />
+                  <text x={node.x} y={node.y} textAnchor="middle" dy="0.3em">{node.label}</text>
+                </g>
+              ))}
+            </svg>
           </div>
         </div>
       </section>
 
-      {/* Case Studies Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Impact in Action</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              See how FxN leadership has transformed organizations and accelerated growth.
-            </p>
-          </RevealOnScroll>
+      {/* WHY FXN */}
+      <section>
+        <div className="wrap">
+          <div className="section-head">
+            <span className="label amber">India&apos;s Shared Leadership Platform</span>
+            <h2>When should you use FxN?</h2>
+          </div>
 
-          <div className="space-y-8">
-            {caseStudies.map((study, index) => (
-              <RevealOnScroll key={study.id} delay={index * 0.1}>
-                <div className="card grid md:grid-cols-2 gap-6 items-center">
-                  <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
-                    <Image
-                      src={study.image}
-                      alt={study.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-serif font-bold mb-2">{study.title}</h3>
-                    <p className="text-sm text-accent font-medium mb-3">{study.company}</p>
-                    <div className="mb-4">
-                      <p className="text-sm font-medium text-foreground mb-2">Challenge:</p>
-                      <p className="text-sm text-foreground-secondary">{study.challenge}</p>
-                    </div>
-                    <div className="mb-4">
-                      <p className="text-sm font-medium text-foreground mb-2">Solution:</p>
-                      <p className="text-sm text-foreground-secondary">{study.solution}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground mb-2">Results:</p>
-                      <ul className="space-y-1">
-                        {study.results.map((result) => (
-                          <li key={result} className="text-sm text-accent flex items-start gap-2">
-                            <span>✓</span>
-                            <span>{result}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </RevealOnScroll>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+            <div>
+              <h3>Early Stage Founders</h3>
+              <p style={{ fontSize: '0.95rem' }}>Access battle-tested operators without permanent overhead. Get GTM, product and fundraising mentorship on-demand.</p>
+            </div>
+            <div>
+              <h3>Growth Stage Companies</h3>
+              <p style={{ fontSize: '0.95rem' }}>Build your founding team. Get function-specific leadership for Finance, People, Ops or Technology without hiring risk.</p>
+            </div>
+            <div>
+              <h3>Pre-IPO Businesses</h3>
+              <p style={{ fontSize: '0.95rem' }}>Scale operations and build deep expertise. Get fractional CFOs, COOs and board-ready leaders aligned with your roadmap.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PODS */}
+      <section id="pods" className="warm">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="label">FxN Leadership Pods</span>
+            <h2>Outcome-led pods. Skin in the game.</h2>
+            <p>Assemble a pod of 3—5 senior leaders aligned on a shared goal. Monthly pods, 12-month commitment. Success is measured. Incentives are aligned.</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+            {[
+              { title: 'Go-to-Market Pod', desc: 'Accelerate market entry & hit revenue targets' },
+              { title: 'Product Pod', desc: 'Ship faster. Build product leadership depth.' },
+              { title: 'Fundraising Pod', desc: 'Close your next round (or Series A)' },
+            ].map((pod) => (
+              <div
+                key={pod.title}
+                style={{
+                  border: '1px solid var(--line)',
+                  padding: '24px',
+                  cursor: 'pointer',
+                }}
+              >
+                <h3>{pod.title}</h3>
+                <p style={{ fontSize: '0.95rem' }}>{pod.desc}</p>
+                <a href="#enquiry" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--teal)' }}>
+                  Learn more →
+                </a>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-16 md:py-24 bg-background-light border-y border-border">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Our Partners</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              Strategic relationships with industry-leading organizations.
-            </p>
-          </RevealOnScroll>
+      {/* PARTNERS */}
+      <section id="partners">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="label amber">Our Network</span>
+            <h2>Companies trusting FxN</h2>
+          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {partners.slice(0, 8).map((partner) => (
-              <RevealOnScroll key={partner.id} className="flex items-center justify-center">
-                <div className="relative w-full h-24 rounded-lg overflow-hidden bg-background border border-border hover:border-accent transition-colors">
-                  <Image
-                    src={partner.logo}
-                    alt={partner.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </RevealOnScroll>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px' }}>
+            {[
+              'Company 1', 'Company 2', 'Company 3', 'Company 4',
+              'Company 5', 'Company 6', 'Company 7', 'Company 8',
+              'Company 9', 'Company 10', 'Company 11', 'Company 12',
+              'Company 13', 'Company 14',
+            ].map((company, idx) => (
+              <div
+                key={idx}
+                style={{
+                  border: '1px solid var(--line)',
+                  padding: '32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '120px',
+                  background: 'var(--paper)',
+                  color: 'var(--grey-light)',
+                  textAlign: 'center',
+                }}
+              >
+                {company}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Latest Insights */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container-custom">
-          <RevealOnScroll direction="up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Latest Insights</h2>
-            <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
-              Thought leadership from FxN community leaders.
-            </p>
-          </RevealOnScroll>
+      {/* INSIGHTS */}
+      <section id="insights" className="dark">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="label on-dark">FxN Insights</span>
+            <h2>Latest from the collective</h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {insights.slice(0, 4).map((insight, index) => (
-              <RevealOnScroll key={insight.id} delay={index * 0.1}>
-                <div className="card h-full flex flex-col">
-                  <div className="relative w-full h-40 rounded-lg overflow-hidden mb-4 bg-border">
-                    <Image
-                      src={insight.image}
-                      alt={insight.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="text-lg font-serif font-bold mb-2 flex-1">{insight.title}</h3>
-                  <p className="text-xs text-foreground-secondary mb-3">{new Date(insight.date).toLocaleDateString()}</p>
-                  <p className="text-xs font-medium text-accent">{insight.author}</p>
-                </div>
-              </RevealOnScroll>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '28px' }}>
+            {[
+              'Article 1: Leadership in Transition',
+              'Article 2: Scaling Without Hiring',
+              'Article 3: Building Board-Ready Operations',
+              'Article 4: Fractional Economics',
+              'Article 5: GTM Velocity',
+              'Article 6: Fundraising 2026',
+              'Article 7: Building Culture at Scale',
+              'Article 8: Tech Leadership Challenges',
+            ].map((article, idx) => (
+              <div
+                key={idx}
+                style={{
+                  border: '1px solid var(--line-dark)',
+                  background: 'var(--navy-soft)',
+                  padding: '20px',
+                  borderRadius: '4px',
+                }}
+              >
+                <h3 style={{ fontSize: '1rem', color: 'var(--ivory)' }}>{article}</h3>
+                <p style={{ fontSize: '12px', color: '#8B97A5', marginTop: '8px' }}>3 min read</p>
+              </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/events-social"
-              className="inline-block px-8 py-4 bg-accent text-background font-medium rounded-md hover:bg-accent-dark transition-all duration-300 transform hover:scale-105"
-            >
-              View All Events & Insights
-            </Link>
+          <div style={{ marginTop: '48px', textAlign: 'center' }}>
+            <a href="/events-social" className="btn btn-primary">
+              Read All Insights
+            </a>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-foreground text-text-light">
-        <div className="container-custom text-center">
-          <RevealOnScroll direction="up">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Ready to Transform Your Leadership Journey?</h2>
-            <p className="text-lg text-foreground-secondary mb-8 max-w-2xl mx-auto">
-              Join our community of visionary leaders and unlock unlimited growth potential.
-            </p>
-            <Link
-              href="/member-directory"
-              className="inline-block px-8 py-4 bg-accent text-background font-medium rounded-md hover:bg-accent-dark transition-all duration-300 transform hover:scale-105"
-            >
-              Join FxN Today
-            </Link>
-          </RevealOnScroll>
+      {/* FINAL CTA */}
+      <section id="final-cta">
+        <div className="wrap" style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto' }}>
+          <span className="label amber">Let&apos;s Talk</span>
+          <h2 style={{ marginBottom: '18px' }}>Ready to find the right fractional leader?</h2>
+          <p style={{ fontSize: '1.02rem' }}>
+            Book a 30-minute discovery call with the FxN team. We&apos;ll understand your challenges and present the best leaders from our network.
+          </p>
+
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '32px' }}>
+            <a href="https://calendly.com/fxn/discovery" target="_blank" className="btn btn-primary">
+              Schedule Discovery Call
+            </a>
+            <a href="/member-directory" className="btn btn-outline">
+              Explore the Directory
+            </a>
+          </div>
         </div>
       </section>
 
       <Footer />
     </>
-  )
+  );
 }

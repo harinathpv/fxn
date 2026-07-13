@@ -1,144 +1,216 @@
-'use client'
+'use client';
 
-import { useState, useMemo } from 'react'
-import Navigation from '@/app/components/Navigation'
-import Footer from '@/app/components/Footer'
-import HeroSection from '@/app/components/HeroSection'
-import MemberCard from '@/app/components/MemberCard'
-import RevealOnScroll from '@/app/components/RevealOnScroll'
-import { members, getAllTags, filterMembers } from '@/app/data/members'
-import { AnimatePresence } from 'framer-motion'
-
-type FilterMode = 'AND' | 'OR'
+import { useState } from 'react';
+import Header from '@/app/components/Header';
+import Footer from '@/app/components/Footer';
 
 export default function MemberDirectory() {
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [filterMode, setFilterMode] = useState<FilterMode>('OR')
-  const allTags = getAllTags()
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({
+    industry: [],
+    expertise: [],
+    company: [],
+  });
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredMembers = useMemo(() => {
-    return filterMembers(selectedTags, filterMode)
-  }, [selectedTags, filterMode])
+  const toggleFilter = (category: string, value: string) => {
+    setSelectedFilters((prev) => ({
+      ...prev,
+      [category]: prev[category].includes(value)
+        ? prev[category].filter((v) => v !== value)
+        : [...prev[category], value],
+    }));
+  };
 
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    )
-  }
-
-  const clearFilters = () => {
-    setSelectedTags([])
-  }
+  const industries = ['Finance', 'GTM', 'Technology', 'People', 'Product', 'Operations'];
+  const expertise = ['Strategy', 'Leadership', 'Growth', 'Tech', 'Finance', 'Operations'];
+  const company_stages = ['Seed', 'Series A', 'Series B', 'Growth', 'Pre-IPO'];
 
   return (
     <>
-      <Navigation />
+      <Header />
 
-      <HeroSection
-        title="Member Directory"
-        subtitle="Our Community"
-        description="Connect with exceptional leaders from diverse industries and backgrounds."
-      />
+      <section className="dir-hero">
+        <div className="wrap">
+          <span className="label">Browse &amp; Connect</span>
+          <h1>Member Directory</h1>
+          <p>FxN's directory of fractional executives, verified partners, and specialist contributors across India.</p>
+          <div className="legend">
+            <div className="item">
+              <div
+                style={{
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  background: 'var(--gold)',
+                }}
+              ></div>
+              Verified FxN Partner — appears at top
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Directory Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container-custom">
-          {/* Filters */}
-          <RevealOnScroll direction="up" className="mb-12">
-            <div className="bg-background-light border border-border rounded-lg p-6">
-              {/* Filter Mode Toggle */}
-              <div className="mb-6 pb-6 border-b border-border">
-                <p className="text-sm font-medium text-foreground mb-3">Filter Mode:</p>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="filterMode"
-                      value="OR"
-                      checked={filterMode === 'OR'}
-                      onChange={(e) => setFilterMode(e.target.value as FilterMode)}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">Match Any (OR)</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="filterMode"
-                      value="AND"
-                      checked={filterMode === 'AND'}
-                      onChange={(e) => setFilterMode(e.target.value as FilterMode)}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-foreground">Match All (AND)</span>
-                  </label>
-                </div>
-              </div>
+      {/* Filter Section */}
+      <div className="filter-section">
+        <div className="filter-inner">
+          <div className="filter-row">
+            <div className="search-box">
+              <input
+                type="text"
+                placeholder="Search by name, expertise..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="result-count">
+              Found <strong>32</strong> members
+            </div>
+          </div>
 
-              {/* Tags */}
-              <div>
-                <p className="text-sm font-medium text-foreground mb-3">Tags:</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {allTags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => toggleTag(tag)}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                        selectedTags.includes(tag)
-                          ? 'bg-accent text-background'
-                          : 'bg-background border border-border text-foreground hover:border-accent'
-                      }`}
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Clear Filters */}
-                {selectedTags.length > 0 && (
+          <div className="filter-groups">
+            {/* Industry Filter */}
+            <div className="filter-group">
+              <div className="fg-label">Functional Expertise</div>
+              <div className="chip-row">
+                {industries.map((ind) => (
                   <button
-                    onClick={clearFilters}
-                    className="text-sm text-accent hover:text-accent-dark transition-colors"
+                    key={ind}
+                    className={`chip ${selectedFilters.industry.includes(ind) ? 'active' : ''}`}
+                    onClick={() => toggleFilter('industry', ind)}
                   >
-                    Clear all filters
+                    {ind}
                   </button>
-                )}
+                ))}
               </div>
             </div>
-          </RevealOnScroll>
 
-          {/* Results Info */}
-          <RevealOnScroll direction="up" className="mb-8">
-            <p className="text-sm text-foreground-secondary">
-              Showing {filteredMembers.length} of {members.length} members
-              {selectedTags.length > 0 && (
-                <span className="text-accent font-medium ml-2">
-                  • Filters: {selectedTags.join(', ')}
-                </span>
-              )}
-            </p>
-          </RevealOnScroll>
-
-          {/* Members Grid */}
-          <AnimatePresence mode="wait">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredMembers.length > 0 ? (
-                filteredMembers.map((member, index) => (
-                  <MemberCard key={member.id} member={member} index={index} />
-                ))
-              ) : (
-                <RevealOnScroll className="col-span-full text-center py-12">
-                  <p className="text-lg text-foreground-secondary">
-                    No members match the selected filters. Try adjusting your search criteria.
-                  </p>
-                </RevealOnScroll>
-              )}
+            {/* Expertise Filter */}
+            <div className="filter-group">
+              <div className="fg-label">Key Skills</div>
+              <div className="chip-row">
+                {expertise.map((exp) => (
+                  <button
+                    key={exp}
+                    className={`chip ${selectedFilters.expertise.includes(exp) ? 'active' : ''}`}
+                    onClick={() => toggleFilter('expertise', exp)}
+                  >
+                    {exp}
+                  </button>
+                ))}
+              </div>
             </div>
-          </AnimatePresence>
+
+            {/* Company Stage Filter */}
+            <div className="filter-group">
+              <div className="fg-label">Company Stage</div>
+              <div className="chip-row">
+                {company_stages.map((stage) => (
+                  <button
+                    key={stage}
+                    className={`chip ${selectedFilters.company.includes(stage) ? 'active' : ''}`}
+                    onClick={() => toggleFilter('company', stage)}
+                  >
+                    {stage}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Directory Grid */}
+      <section className="dir-section">
+        <div className="wrap">
+          {/* Verified Partners Section */}
+          <div>
+            <div className="tier-heading">
+              <h2>Verified FxN Partners</h2>
+              <div className="line"></div>
+            </div>
+
+            <div className="member-grid">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={`partner-${i}`} className="member-card verified">
+                  <div className="mc-top">
+                    <div className="mc-avatar">
+                      <span className="initials">AB</span>
+                    </div>
+                    <div className="mc-id">
+                      <h3>Arun Bhattacharya</h3>
+                      <div className="years">5 years with FxN</div>
+                    </div>
+                  </div>
+                  <div className="mc-body">
+                    <div className="mc-block">
+                      <div className="bl">Functional Expertise</div>
+                      <div className="tag-row">
+                        <span className="tag">Finance</span>
+                        <span className="tag">GTM</span>
+                      </div>
+                    </div>
+                    <div className="mc-block">
+                      <div className="bl">Industries</div>
+                      <div className="tag-row">
+                        <span className="tag">SaaS</span>
+                        <span className="tag">FinTech</span>
+                      </div>
+                    </div>
+                    <div className="mc-links">
+                      <a href="#">Profile →</a>
+                      <a href="#">LinkedIn →</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* All Members Section */}
+          <div style={{ marginTop: '80px' }}>
+            <div className="tier-heading">
+              <h2>All Members ({32 - 4} remaining)</h2>
+              <div className="line"></div>
+            </div>
+
+            <div className="member-grid">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <div key={`member-${i}`} className="member-card">
+                  <div className="mc-top">
+                    <div className="mc-avatar">
+                      <span className="initials">CD</span>
+                    </div>
+                    <div className="mc-id">
+                      <h3>Member Name {i}</h3>
+                      <div className="years">2 years with FxN</div>
+                    </div>
+                  </div>
+                  <div className="mc-body">
+                    <div className="mc-block">
+                      <div className="bl">Functional Expertise</div>
+                      <div className="tag-row">
+                        <span className="tag">Technology</span>
+                      </div>
+                    </div>
+                    <div className="mc-block">
+                      <div className="bl">Industries</div>
+                      <div className="tag-row">
+                        <span className="tag">B2B</span>
+                      </div>
+                    </div>
+                    <div className="mc-links">
+                      <a href="#">Profile →</a>
+                      <a href="#">LinkedIn →</a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       <Footer />
     </>
-  )
+  );
 }
