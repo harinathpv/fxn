@@ -15,39 +15,13 @@ const fraunces = Fraunces({
 })
 
 export const metadata: Metadata = {
-  title: 'FxN | Leadership Network',
-  description: 'Reimagining leadership through functional networks and strategic partnerships.',
-  keywords: ['leadership', 'network', 'functional', 'partnership', 'events', 'directory'],
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://fxn.com',
-    title: 'FxN | Leadership Network',
-    description: 'Reimagining leadership through functional networks and strategic partnerships.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'FxN Leadership Network',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'FxN | Leadership Network',
-    description: 'Reimagining leadership through functional networks and strategic partnerships.',
-    images: ['/og-image.png'],
-  },
+  title: 'FxN — Leadership Pods and Leadership as a Service for Growing Companies',
+  description: 'FxN is India\'s shared leadership platform, helping growing companies access senior leaders through outcome-led Leadership Pods and flexible Leadership as a Service subscriptions.',
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-  themeColor: '#FF6B3B',
-  colorScheme: 'light',
 }
 
 export default function RootLayout({
@@ -56,8 +30,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${fraunces.variable} bg-background`}>
-      <body className="font-sans text-foreground">
+    <html lang="en" className={`${dmSans.variable} ${fraunces.variable}`}>
+      <head>
+        <link rel="icon" type="image/png" href="https://www.fxn.network/images/fxn-logo-new.png" />
+      </head>
+      <body>
         {children}
       </body>
     </html>
